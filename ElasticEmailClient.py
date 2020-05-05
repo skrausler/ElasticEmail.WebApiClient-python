@@ -28,30 +28,30 @@ from enum import Enum
 
 # API version 2.42.0
 class ApiClient:
-	apiUri = 'https://api.elasticemail.com/v2'
-	apiKey = '00000000-0000-0000-0000-0000000000000'
+    apiUri = 'https://api.elasticemail.com/v2'
+    apiKey = '00000000-0000-0000-0000-0000000000000'
 
-	def Request(method, url, data=dict(), attachs=None):
-		data['apikey'] = ApiClient.apiKey
-		if method == 'POST':
-			result = requests.post(ApiClient.apiUri + url, data = data, files = attachs)
-		elif method == 'PUT':
-			result = requests.put(ApiClient.apiUri + url, data = data)
-		elif method == 'GET':
-			attach = ''
-			params = { k: v for k, v in data.items() if v != None } 
-			result = requests.get(ApiClient.apiUri + url, params = params) 
-			print(result.url) 	
-			
-		jsonMy = result.json()
-		
-		if jsonMy['success'] is False:
-			return jsonMy['error']
-			
-		if 'data' in jsonMy.keys():
-			return jsonMy['data']
-		else:
-			return 'success'
+    def Request(method, url, data=dict(), attachs=None):
+        data['apikey'] = ApiClient.apiKey
+        if method == 'POST':
+            result = requests.post(ApiClient.apiUri + url, data = data, files = attachs)
+        elif method == 'PUT':
+            result = requests.put(ApiClient.apiUri + url, data = data)
+        elif method == 'GET':
+            attach = ''
+            params = { k: v for k, v in data.items() if v != None } 
+            result = requests.get(ApiClient.apiUri + url, params = params) 
+            print(result.url)     
+            
+        jsonMy = result.json()
+        
+        if jsonMy['success'] is False:
+            return jsonMy['error']
+            
+        if 'data' in jsonMy.keys():
+            return jsonMy['data']
+        else:
+            return 'success'
 
     def AddDictionaryParameter(dictionary, paramName, parameters):
         for key in dictionary:
